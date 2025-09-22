@@ -6,9 +6,10 @@ public class Category : BaseEntity
 {
 	public int Id { get; set; }
 
-	[Required]
+	[Required(ErrorMessage = "Category name is required")]
+	[StringLength(50)]
 	public string? Name { get; set; }
 
-	public virtual ICollection<BookToCategoryMapping>? BookCategories { get; set; }
+	public virtual ICollection<Book>? Book { get; set; }
 
 }

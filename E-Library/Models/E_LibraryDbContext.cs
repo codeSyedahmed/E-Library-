@@ -11,7 +11,6 @@ public class E_LibraryDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Book> Books { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Review> Reviews { get; set; }
-    public DbSet<BookToCategoryMapping> BookToCategoryMappings { get; set; }
     public DbSet<UserToBookMapping> UserToBookMappings { get; set; }
 
 }
