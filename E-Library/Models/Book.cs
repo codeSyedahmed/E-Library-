@@ -16,7 +16,7 @@ public class Book : BaseEntity
 	public string? Image { get; set; }
 
     public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public virtual Category? Category { get; set; }
     public virtual ICollection<UserToBookMapping>? UserToBook { get; set; }
 	public virtual ICollection<Review>? Review { get; set; }
 }
