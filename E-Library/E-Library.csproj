@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="wwwroot\books\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
