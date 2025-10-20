@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookToCategoryMapping>
+﻿@model IEnumerable<E_Library.ViewModels.BookFormViewModel>
 @{
     ViewData["Title"] = "BookList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -36,6 +36,7 @@
                             <th scope="col" class="text-dark text-center">Name</th>
                             <th scope="col" class="text-dark text-center">Description</th>
                             <th scope="col" class="text-dark text-center">Category</th>
+                            <th scope="col" class="text-dark text-center">Read</th>
                             <th scope="col" class="text-dark text-center">Actions</th>
                         </tr>
                     </thead>
@@ -50,14 +51,22 @@
                                     @serialNumber
                                 </td>
                                 <td class="text-dark text-center">
-                                    @item.Book.Name
+                                    @item.Name
                                 </td>
                                 <td class="text-dark text-center">
-                                    @item.Book.Description
+                                    @item.Description
                                 </td>
                                 
                                 <td class="text-dark text-center">
-                                    @item.Category.Name
+                                    @item.CategoryName
+                                </td>
+
+                                <td class="text-dark text-center">
+                                    @if (item.IsAvailableOnline)
+                                    {
+                                        <a asp-action="ReadBook" asp-route-id="@item.Id"
+                                           class="btn btn-info btn-sm">Read Online</a>
+                                    }
                                 </td>
                                 
                                 <td class="text-dark text-center">
@@ -90,7 +99,7 @@
                                                 <form asp-controller="Book" asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
                                                     @Html.AntiForgeryToken()
                                                     <button type="submit" class="dropdown-item d-flex align-items-center gap-3 border-0 bg-transparent w-100"
-                                                            onclick="return confirm('Are you sure you want to delete this category?')">
+                                                            onclick="return confirm('Are you sure you want to delete this book?')">
                                                         <i class="fs-4 ti ti-trash"></i>Delete
                                                     </button>
                                                 </form>

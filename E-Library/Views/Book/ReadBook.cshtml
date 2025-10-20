@@ -1,0 +1,39 @@
+﻿@model E_Library.ViewModels.BookFormViewModel
+@{
+    ViewData["Title"] = "Read Book";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">@Model.Name</h4>
+                @if (Model.AllowDownload && !string.IsNullOrEmpty(Model.PdfFilePath))
+                {
+                    <a href="@Url.Action("DownloadBook", new { id = Model.Id })"
+                       class="btn btn-light btn-sm">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            @if (!string.IsNullOrEmpty(Model.PdfFilePath))
+            {
+                <iframe src="@Model.PdfFilePath"
+                        class="w-100"
+                        style="height: 80vh; border: none;">
+                </iframe>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-book fa-3x text-muted mb-3"></i>
+                    <h5>No PDF Available</h5>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@model E_Library.ViewModels.BookFormViewModel
+@{
+    ViewData["Title"] = "EditBook";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="card-title fw-semibold mb-4">Edit Book</h5>
+                <a asp-action="BookList" class="btn btn-primary">
+                    <i class="fas fa-list"></i> View Book List
+                </a>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="EditBook" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" /> 
+                        <input type="hidden" asp-for="Image" />
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Book Name</label>
+                            <input asp-for=Name type="text" class="form-control" id="name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input asp-for=Description type="text" class="form-control" id="description">
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                 <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input asp-for=Image type="file" name="imageFile" class="form-control" id="image">
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                            </div>
+                            <div class="col-4">
+                                @if (!string.IsNullOrEmpty(Model.Image))
+                                {
+                                    <div class="mb-3">
+                                        <label class="form-label">Current Book Image</label>
+                                        <div>
+                                            <img src="@Model.Image" class="img-thumbnail" 
+                                                 style="max-width: 150px; max-height: 200px; object-fit: cover;" 
+                                                 alt="Current book image">
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-control" id="category">
+                                <option value="">--select--</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end align-items-center gap-3 mt-3">
+                            <a asp-action="BookList" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
