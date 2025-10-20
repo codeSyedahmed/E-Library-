@@ -16,10 +16,18 @@ namespace E_Library.ViewModels
         public string? Title { get; set; }
 		public string? Description { get; set; }
 
-        public IFormFile? ImageFile { get; set; }
-		public string? Image { get; set; }
+        public IFormFile ImageFile { get; set; }
+		public string Image { get; set; }
 
-		[Required(ErrorMessage = "Please select at least one category")]
+        public IFormFile PdfFile { get; set; }
+        public string PdfFilePath { get; set; }
+
+        //public string Content { get; set; }
+
+        public bool IsAvailableOnline { get; set; } = true;
+        public bool AllowDownload { get; set; } = true;
+
+        [Required(ErrorMessage = "Please select at least one category")]
 		public int? CategoryId { get; set; }
 
         public List<SelectListItem>? CategoryList { get; set; }

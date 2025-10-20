@@ -99,6 +99,9 @@ namespace E_Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("AllowDownload")
+                        .HasColumnType("bit");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -114,6 +117,9 @@ namespace E_Library.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAvailableOnline")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -124,6 +130,10 @@ namespace E_Library.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PdfFilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

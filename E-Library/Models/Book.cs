@@ -15,6 +15,11 @@ public class Book : BaseEntity
 
 	public string? Image { get; set; }
 
+    public string PdfFilePath { get; set; } // PDF file storage
+    //public string Content { get; set; } // HTML content for online reading
+    public bool IsAvailableOnline { get; set; } = true;
+    public bool AllowDownload { get; set; } = true;
+
     public int CategoryId { get; set; }
     public virtual Category? Category { get; set; }
     public virtual ICollection<UserToBookMapping>? UserToBook { get; set; }

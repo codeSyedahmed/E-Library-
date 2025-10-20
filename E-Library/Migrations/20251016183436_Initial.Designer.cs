@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Library.Migrations
 {
     [DbContext(typeof(E_LibraryDbContext))]
-    [Migration("20251011073303_Initial")]
+    [Migration("20251016183436_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -102,6 +102,9 @@ namespace E_Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("AllowDownload")
+                        .HasColumnType("bit");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -117,6 +120,9 @@ namespace E_Library.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAvailableOnline")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -127,6 +133,10 @@ namespace E_Library.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PdfFilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
