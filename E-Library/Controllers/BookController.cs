@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace E_Library.Controllers
 {
@@ -68,7 +67,7 @@ namespace E_Library.Controllers
         public async Task<IActionResult> CreateBook(BookFormViewModel bookViewModel)
         {
             bookViewModel.CategoryList = await GetCategories();
-            ModelState.Clear();
+            //ModelState.Clear();
 
             if (bookViewModel.ImageFile == null || bookViewModel.ImageFile.Length == 0)
             {
@@ -147,29 +146,48 @@ namespace E_Library.Controllers
         public async Task<IActionResult> EditBook(int id, BookFormViewModel bookViewModel)
         {
             bookViewModel.CategoryList = await GetCategories();
+
             if (bookViewModel.ImageFile != null && bookViewModel.ImageFile.Length > 0)
             {
-                //ModelState.Remove(bookViewModel.ImageFile.FileName);
                 var extension = Path.GetExtension(bookViewModel.ImageFile.FileName).ToLower();
                 var allowedExtension = new[] { ".jpg", ".jpeg", ".png" };
+
                 if (!allowedExtension.Contains(extension))
                 {
                     ModelState.AddModelError("ImageFile", "Only (jpg, jpeg, png) files are allowed!");
                 }
             }
 
+            // ✅ PDF validation only if file uploaded
+            if (bookViewModel.PdfFile != null && bookViewModel.PdfFile.Length > 0)
+            {
+                var pdfExtension = Path.GetExtension(bookViewModel.PdfFile.FileName).ToLower();
+
+                if (pdfExtension != ".pdf")
+                {
+                    ModelState.AddModelError("PdfFile", "Only PDF files are allowed");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 var book = await _context.Books
-                .FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
+                    .FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
                 book.Name = bookViewModel.Name;
                 book.Description = bookViewModel.Description;
                 book.CategoryId = bookViewModel.CategoryId.Value;
 
-                if (bookViewModel.ImageFile != null && bookViewModel.ImageFile.Length > 0)
+                // Image update only if new uploaded
+                if (bookViewModel.ImageFile != null)
                 {
                     book.Image = await FileUpload(bookViewModel.ImageFile);
+                }
+
+                // PDF update only if new uploaded
+                if (bookViewModel.PdfFile != null)
+                {
+                    book.PdfFilePath = await SavePdfFile(bookViewModel.PdfFile);
                 }
 
                 _context.Books.Update(book);
@@ -209,6 +227,9 @@ namespace E_Library.Controllers
 
         private async Task<string> FileUpload(IFormFile imageFile)
         {
+            if (imageFile == null || imageFile.Length == 0)
+                return null;
+
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);
@@ -229,6 +250,9 @@ namespace E_Library.Controllers
 
         private async Task<string> SavePdfFile(IFormFile pdfFile)
         {
+            if (pdfFile == null || pdfFile.Length == 0)
+                return null;
+
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "books");
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);

@@ -30,11 +30,12 @@
                         <div class="row">
                             <div class="col-8">
                                  <div class="mb-3">
-                            <label for="image" class="form-label">Image</label>
-                            <input asp-for=Image type="file" name="imageFile" class="form-control" id="image">
-                            <span asp-validation-for="ImageFile" class="text-danger"></span>
-                        </div>
+                                    <label class="form-label">Image</label>
+                                    <input asp-for=ImageFile type="file" class="form-control" id="image">
+                                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                 </div>
                             </div>
+                            
                             <div class="col-4">
                                 @if (!string.IsNullOrEmpty(Model.Image))
                                 {
@@ -42,12 +43,17 @@
                                         <label class="form-label">Current Book Image</label>
                                         <div>
                                             <img src="@Model.Image" class="img-thumbnail" 
-                                                 style="max-width: 150px; max-height: 200px; object-fit: cover;" 
+                                                 style="max-width: 130px; max-height: 180px; object-fit: cover;" 
                                                  alt="Current book image">
                                         </div>
                                     </div>
                                 }
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload PDF</label>
+                                <input asp-for="PdfFile" type="file" class="form-control" accept=".pdf">
+                            <span asp-validation-for="PdfFile" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>

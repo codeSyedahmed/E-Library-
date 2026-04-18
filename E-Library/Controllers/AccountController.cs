@@ -3,6 +3,8 @@ using E_Library.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace E_Library.Controllers
 {
@@ -11,18 +13,42 @@ namespace E_Library.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly E_LibraryDbContext _context;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, E_LibraryDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _context = context;
         }
         [Authorize]
         public IActionResult Index()
         {
-            
-            return View();
+            ViewBag.TotalBooks = _context.Books.Count();
+            ViewBag.TotalUsers = _context.Users.Count();
+            ViewBag.TotalCategories = _context.Categories.Count();
+            var categories = _context.Categories
+                .Select(c => new
+                {
+                    Name = c.Name,
+                    BookCount = c.Book.Count()
+                });
+                         
+            ViewBag.CategoriesName = categories.Select(c => c.Name).ToList();
+            ViewBag.CategoriesCount = categories.Select(c => c.BookCount).ToList();
+
+            var RecentBooks = _context.Books.Include(c => c.Category)
+                .Where(b => !b.IsDeleted && !b.Category.IsDeleted)
+                .OrderByDescending(b => b.Id)
+                .Take(5).Select(book => new BookFormViewModel
+                {
+                    Id = book.Id,
+                    Name = book.Name,
+                    CategoryName = book.Category.Name,
+                }).ToList();
+
+            return View(RecentBooks);
         }
         [HttpGet]
         public IActionResult Register() => View();
