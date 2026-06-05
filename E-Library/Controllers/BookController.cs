@@ -55,6 +55,30 @@ namespace E_Library.Controllers
             return View(book);
         }
         [HttpGet]
+        public async Task<IActionResult> DownloadBook(int id)
+        {
+            var file = _context.Books.Find(id);
+
+            if (file == null)
+                return NotFound();
+
+            var relativePath = file.PdfFilePath.TrimStart('/');
+
+            var fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                relativePath);
+
+            if (!System.IO.File.Exists(fullPath))
+                return NotFound($"File not found: {fullPath}");
+
+            return PhysicalFile(
+                fullPath,
+                "application/pdf",
+                Path.GetFileName(fullPath));
+
+        }
+        [HttpGet]
         public async Task<IActionResult> CreateBook()
         {
             var bookViewModel = new BookFormViewModel();
