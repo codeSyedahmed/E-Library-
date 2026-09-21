@@ -1,0 +1,428 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor accessor
+
+<!DOCTYPE html>
+<html lang="en">
+<!--<< Header Area >>-->
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="gramentheme">
+    <meta name="description" content="Bookle - Book Store WooCommerce Html Template ">
+    <!-- ======== Page title ============ -->
+    <title>Bookle - Book Store WooCommerce Html Template</title>
+    <!--<< Favcion >>-->
+    <link rel="shortcut icon" href="~/Templates/User/assets/img/favicon.png">
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/bootstrap.min.css">
+    <!--<< All Min Css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/all.min.css">
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/animate.css">
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/magnific-popup.css">
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/meanmenu.css">
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/swiper-bundle.min.css">
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/nice-select.css">
+    <!--<< Icomoon.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/icomoon.css">
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="~/Templates/User/assets/css/main.css">
+</head>
+
+<body>
+
+    <!-- Cursor follower -->
+    <div class="cursor-follower"></div>
+
+    <!-- Preloader Start -->
+    <div id="preloader" class="preloader">
+        <div class="animation-preloader">
+            <div class="spinner">
+            </div>
+            <div class="txt-loading">
+                <span data-text-preloader="E" class="letters-loading">
+                    E
+                </span>
+                <span data-text-preloader="-" class="letters-loading">
+                    -
+                </span>
+                <span data-text-preloader="L" class="letters-loading">
+                    L
+                </span>
+                <span data-text-preloader="I" class="letters-loading">
+                    I
+                </span>
+                <span data-text-preloader="B" class="letters-loading">
+                    B
+                </span>
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+                <span data-text-preloader="Y" class="letters-loading">
+                    Y
+                </span>
+            </div>
+            <p class="text-center">Loading</p>
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back To Top Start -->
+    <button id="back-top" class="back-to-top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- Sticky Header Section start  -->
+    <header class="header-2 sticky-top">
+        <div class="mega-menu-wrapper">
+            <div class="header-main">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        <!-- Logo + Menu -->
+                        <div class="col-6 col-xl-8">
+                            <div class="header-left">
+
+                                <!-- Logo -->
+                                <div class="logo">
+                                    <a href="index.html" class="header-logo">
+                                        <img src="~/Templates/User/assets/img/logo/E-LibraryLogo1.png"
+                                             alt="logo-img" style="max-width:130px;">
+                                    </a>
+                                </div>
+
+                                <!-- Menu -->
+                                <div class="mean__menu-wrapper">
+                                    <div class="main-menu">
+                                        <nav id="mobile-menu">
+                                            <ul>
+                                                <li>
+                                                    <a href="index.html">
+                                                        Home
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="shop.html">
+                                                        Books
+                                                        <i class="fas fa-angle-down"></i>
+                                                    </a>
+
+                                                    <ul class="submenu">
+                                                        <li>
+                                                            <a href="shop.html">
+                                                                Book Default
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="shop-list.html">
+                                                                Book List
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="shop-details.html">
+                                                                Book Details
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <li>
+                                                    <a href="about.html">
+                                                        About Us
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="contact.html">
+                                                        Contact
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Sign Up -->
+                        <div class="col-6 col-xl-4">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <div class="menu-cart">
+                                    <button type="button"
+                                            class="theme-btn rounded-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#registrationModal">
+                                        Sign Up
+                                    </button>
+                                    <button type="button"
+                                            class="theme-btn rounded-1"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#loginModal">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    @RenderBody();
+
+
+    <!-- Footer Section Start -->
+    <footer class="footer-section footer-bg">
+        <div class="container">
+            <div class="contact-info-area">
+                <div class="contact-info-items wow fadeInUp" data-wow-delay=".2s">
+                    <div class="icon">
+                        <i class="icon-icon-5"></i>
+                    </div>
+                    <div class="content">
+                        <p>Call Us 7/24</p>
+                        <h3>
+                            <a href="tel:+2085550112">+208-555-0112</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="contact-info-items wow fadeInUp" data-wow-delay=".4s">
+                    <div class="icon">
+                        <i class="icon-icon-6"></i>
+                    </div>
+                    <div class="content">
+                        <p>Make a Quote</p>
+                        <h3>
+                            <a href="mailto:example@gmail.com">example@gmail.com</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="contact-info-items wow fadeInUp" data-wow-delay=".6s">
+                    <div class="icon">
+                        <i class="icon-icon-7"></i>
+                    </div>
+                    <div class="content">
+                        <p>Opening Hour</p>
+                        <h3>
+                            Sunday - Fri: 9 aM - 6 pM
+                        </h3>
+                    </div>
+                </div>
+                <div class="contact-info-items wow fadeInUp" data-wow-delay=".8s">
+                    <div class="icon">
+                        <i class="icon-icon-8"></i>
+                    </div>
+                    <div class="content">
+                        <p>Location</p>
+                        <h3>
+                            4517 Washington ave.
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-widgets-wrapper">
+            <div class="plane-shape float-bob-y">
+                <img src="~/Templates/User/assets/img/plane-shape.png" alt="img">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <a href="index.html">
+                                    <img src="~/Templates/User/assets/img/logo/white-logo.svg" alt="logo-img">
+                                </a>
+                            </div>
+                            <div class="footer-content">
+                                <p>
+                                    Phasellus ultricies aliquam volutpat ullamcorper laoreet neque, a lacinia curabitur
+                                    lacinia mollis
+                                </p>
+                                <div class="social-icon d-flex align-items-center">
+                                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".4s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h3>Costumers Support</h3>
+                            </div>
+                            <ul class="list-area">
+                                <li>
+                                    <a href="shop.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Store List
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Opening Hours
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Contact Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Return Policy
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".6s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h3>Categories</h3>
+                            </div>
+                            <ul class="list-area">
+                                <li>
+                                    <a href="shop.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Novel Books
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Poetry Books
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        Political Books
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <i class="fa-solid fa-chevrons-right"></i>
+                                        History Books
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h3>Newsletter</h3>
+                            </div>
+                            <div class="footer-content">
+                                <p>Sign up to searing weekly newsletter to get the latest updates.</p>
+                                <div class="footer-input">
+                                    <input type="email" id="email2" placeholder="Enter Email Address">
+                                    <button class="newsletter-btn" type="submit">
+                                        <i class="fa-regular fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-wrapper d-flex align-items-center justify-content-between">
+                    <p class="wow fadeInLeft" data-wow-delay=".3s">
+                        © All Copyright 2024 by <a href="index.html">Bookle</a>
+                    </p>
+                    <ul class="brand-logo wow fadeInRight" data-wow-delay=".5s">
+                        <li>
+                            <a href="contact.html">
+                                <img src="~/Templates/User/assets/img/visa-logo.png" alt="img">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html">
+                                <img src="~/Templates/User/assets/img/mastercard.png" alt="img">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html">
+                                <img src="~/Templates/User/assets/img/payoneer.png" alt="img">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html">
+                                <img src="~/Templates/User/assets/img/affirm.png" alt="img">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--<< All JS Plugins >>-->
+    <script src="~/Templates/User/assets/js/jquery-3.7.1.min.js"></script>
+    <!--<< Viewport Js >>-->
+    <script src="~/Templates/User/assets/js/viewport.jquery.js"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="~/Templates/User/assets/js/bootstrap.bundle.min.js"></script>
+    <!--<< Nice Select Js >>-->
+    <script src="~/Templates/User/assets/js/jquery.nice-select.min.js"></script>
+    <!--<< Waypoints Js >>-->
+    <script src="~/Templates/User/assets/js/jquery.waypoints.js"></script>
+    <!--<< Counterup Js >>-->
+    <script src="~/Templates/User/assets/js/jquery.counterup.min.js"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="~/Templates/User/assets/js/swiper-bundle.min.js"></script>
+    <!--<< MeanMenu Js >>-->
+    <script src="~/Templates/User/assets/js/jquery.meanmenu.min.js"></script>
+    <!--<< Magnific Popup Js >>-->
+    <script src="~/Templates/User/assets/js/jquery.magnific-popup.min.js"></script>
+    <!--<< Wow Animation Js >>-->
+    <script src="~/Templates/User/assets/js/wow.min.js"></script>
+    <!-- Gsap -->
+    <script src="~/Templates/User/assets/js/gsap.min.js"></script>
+    <!--<< Main.js >>-->
+    <script src="~/Templates/User/assets/js/main.js"></script>
+</body>
+
+</html>
